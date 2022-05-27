@@ -108,9 +108,7 @@ def upgrade_required():
     # Obtains show version output
     sh_version = cli('show version')
     # Check if switch is on approved code: 16.10.01
-    # JEREMY WAS HERE
     match = re.search('%s', sh_version) (software_version)
-    # JEREMY WAS HERE
     # Returns False if on approved version or True if upgrade is required
     if match:
         return False
