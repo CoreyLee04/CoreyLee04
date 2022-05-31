@@ -28,7 +28,7 @@ software_mappings = {
     }
 }
 
-http_server = '10.85.134.66'
+tftp_server = '10.85.134.66'
 log_tofile = True
 release_set = ['17.05', '17.06']
 
@@ -61,12 +61,12 @@ def main():
                 if not verify_dst_image_md5(software_image, software_md5_checksum):
                     print ('*** Attempting to transfer image to switch.. ***')
                     log_info('*** Attempting to transfer image to switch.. ***')
-                    file_transfer(http_server, software_image)
+                    file_transfer(tftp_server, software_image)
                     if not verify_dst_image_md5(software_image, software_md5_checksum):
                         log_critical('*** Failed Xfer mds hash mismatch ***')
                         raise ValueError('Failed Xfer')
             else:
-              file_transfer(http_server, software_image)
+              file_transfer(tftp_server, software_image)
               if current_version[0:5] not in release_set:
                 if not verify_dst_image_md5(software_image, software_md5_checksum):
                     log_critical('XXX Failed Xfer XXX')
@@ -98,7 +98,7 @@ def main():
         config_file = '%s.cfg' % model
         print('**** Downloading config file ****\n')
         log_info('**** Downloading config file ****\n')
-        file_transfer(http_server, config_file)
+        file_transfer(tftp_server, config_file)
         print ('*** Trying to perform  Day 0 configuration push  **** \n')
         log_info('*** Trying to perform  Day 0 configuration push  **** \n')
         #configure_replace(config_file)
@@ -176,10 +176,10 @@ def deploy_eem_upgrade_script(image):
     print ('*** Successfully configured upgrade EEM script on device! ***')
     log_info('*** Successfully configured upgrade EEM script on device! ***')
 
-def file_transfer(http_server, file):
+def file_transfer(tftp_server, file):
   print('**** Start transferring  file *******\n')
   log_info('**** Start transferring  file *******\n')
-  res = cli('copy http://%s/%s flash:%s' % (http_server,file,file))
+  res = cli('copy http://%s/%s flash:%s' % (tftp_server,file,file))
   print(res)
   log_info(res)
   print("\n")
@@ -271,15 +271,6 @@ def verify_dst_image_md5(image, src_md5, file_system='flash:/'):
        log_info('****  MD5 checksum failed due to an exception  *****')
        log_info(e)
        return True
-        #output = subprocess.Popen(['md5sum', '/flash/'+image],stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-        #stdout_data, stderr_data = output.communicate()
-        #output.wait() 
-        #outputdata = (stdout_data.decode('utf-8')).split()
-        #md5_returned = outputdata[0]
-        #if src_md5 == md5_returned:
-         #   return True
-        #else:
-         #   return False
     
 def create_logfile():
     try:
