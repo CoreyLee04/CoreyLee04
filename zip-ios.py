@@ -16,15 +16,10 @@ software_mappings = {
         'software_version': '17.06.01',
         'software_md5_checksum': 'fdb9c92bae37f9130d0ee6761afe2919'
     },
-    'C9500-24Q': {
-        'software_image': 'cat9k_iosxe.17.06.01.SPA.bin',
-        'software_version': '17.06.01',
-        'software_md5_checksum': 'fdb9c92bae37f9130d0ee6761afe2919'
-    },
-    'ASR1001-HX': {
-        'software_image': 'asr1000-universalk9.17.05.01a.SPA.bin',
-        'software_version': '17.05.01a',
-        'software_md5_checksum': '0e4b1fc1448f8ee289634a41f75dc215'
+    'C3850-48P': {
+        'software_image': 'cat3k_caa-universalk9.16.12.07.SPA.bin',
+        'software_version': '16.12.07',
+        'software_md5_checksum': '5de9de43040184c7de21960456027f8c'
     }
 }
 
